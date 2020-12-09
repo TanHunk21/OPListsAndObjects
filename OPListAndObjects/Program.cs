@@ -46,12 +46,30 @@ namespace OPListAndObjects
                     Console.WriteLine($"Planet: {planetFromList.Name}; Mass: {planetFromList.Mass}");
                 }
             }
+            public void FindAndRemove(string searchEntry)
+            {
+                for(int i= 0;i <planets.Count; i++)
+                {
+                    if (planets[i].Name == searchEntry)
+                    {
+                        Console.WriteLine($"Planet {planets[i].Name} has been removed.");
+                        planets.Remove(planets[i]);
+                        break;
+
+                    }
+                }
+            }
+            public void CountPlanets()
+            {
+                Console.WriteLine($"There are {planets.Count} planets on the list.");
+            }
         }
         
 
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            ListOfPlanets newPlanetsList = new ListOfPlanets();
             string filePath = @"C:\Users\opilane\samples";
             string fileName = @"planets.txt";
             string fullPath = Path.Combine(filePath, fileName);
@@ -66,7 +84,19 @@ namespace OPListAndObjects
                 Console.WriteLine(planetName);
                 Console.WriteLine(planetMass);
                 Console.WriteLine("----");
+
+                
+                newPlanetsList.AddPlanetToList(planetName, planetMass);
             }
+            newPlanetsList.PrintPlanets();
+            newPlanetsList.CountPlanets();
+            
+            newPlanetsList.PrintPlanets();
+            Console.WriteLine("what planet do you want to remove?");
+            string userInput = Console.ReadLine();
+            newPlanetsList.FindAndRemove(userInput);
+            newPlanetsList.PrintPlanets();
+            
         }
     }
 }
